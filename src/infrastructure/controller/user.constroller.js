@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const UserService = require('../../application/service/User/user.service');
-const { authenticate, authorize } = require('../../infrastructure/middlewares/authMiddleware');
+const { authenticateUser, authorizeRole } = require('../../infrastructure/middlewares/authMiddleware');
+
 const service = new UserService();
 
 const UserController = {
@@ -39,7 +40,7 @@ const UserController = {
         }
     },
 
-    getAllUsers: [authenticate, authorize(['admin', 'employee']), async (req, res) => {
+    getAllUsers: [authenticateUser, authorizeRole(['admin', 'employee']), async (req, res) => {
         try {
             const users = await service.getAllUsers();
             res.status(200).json(users);
@@ -48,7 +49,7 @@ const UserController = {
         }
     }],
     
-    getUserById: [authenticate, authorize(['admin', 'employee']), async (req, res) => {
+    getUserById: [authenticateUser, authorizeRole(['admin', 'employee']), async (req, res) => {
         try {
             const { id } = req.params;
             const user = await service.getUserById(id);
@@ -62,7 +63,7 @@ const UserController = {
         }
     }],
 
-    createUser: [authenticate, authorize(['admin']), async (req, res) => {
+    createUser: [authenticateUser, authorizeRole(['admin']), async (req, res) => {
         try {
             const { name, email, password } = req.body;
             const newUser = await service.createUser(name, email, password);
@@ -72,7 +73,7 @@ const UserController = {
         }
     }],
 
-    updateUser: [authenticate, authorize(['admin']), async (req, res) => {
+    updateUser: [authenticateUser, authorizeRole(['admin']), async (req, res) => {
         try {
             const { id } = req.params;
             const { name, email, password } = req.body;
@@ -87,7 +88,7 @@ const UserController = {
         }
     }],
 
-    deleteUser: [authenticate, authorize(['admin']), async (req, res) => {
+    deleteUser: [authenticateUser, authorizeRole(['admin']), async (req, res) => {
         try {
             const { id } = req.params;
             const deletedUser = await service.deleteUser(id);

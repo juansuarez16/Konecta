@@ -1,10 +1,10 @@
 const RequestService = require('../../application/service/Request/request.service');
-const { authenticate, authorize } = require('../../infrastructure/middlewares/authMiddleware');
-
+const { authenticateUser, authorizeRole } = require('../../infrastructure/middlewares/authMiddleware');
+const requestService = new RequestService();
 // Obtener todas las solicitudes
-const getAllRequests = [authenticate, authorize(['admin', 'employee']), async (req, res) => {
+const getAllRequests = [authenticateUser, authorizeRole(['admin', 'employee']), async (req, res) => {
     try {
-        const requests = await RequestService.getAllRequests();
+        const requests = await requestService.getAllRequests();
         res.status(200).json(requests);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener las solicitudes' });
@@ -12,10 +12,10 @@ const getAllRequests = [authenticate, authorize(['admin', 'employee']), async (r
 }];
 
 // Obtener una solicitud por su ID
-const getRequestById = [authenticate, authorize(['admin', 'employee']), async (req, res) => {
+const getRequestById = [authenticateUser, authorizeRole(['admin', 'employee']), async (req, res) => {
     const { id } = req.params;
     try {
-        const request = await RequestService.getRequestById(id);
+        const request = await requestService.getRequestById(id);
         if (request) {
             res.status(200).json(request);
         } else {
@@ -27,10 +27,10 @@ const getRequestById = [authenticate, authorize(['admin', 'employee']), async (r
 }];
 
 // Crear una nueva solicitud
-const createRequest = [authenticate, authorize(['admin', 'employee']), async (req, res) => {
+const createRequest = [authenticateUser, authorizeRole(['admin', 'employee']), async (req, res) => {
     const { title, description } = req.body;
     try {
-        const newRequest = await RequestService.createRequest(title, description);
+        const newRequest = await requestService.createRequest(title, description);
         res.status(201).json(newRequest);
     } catch (error) {
         res.status(500).json({ error: 'Error al crear la solicitud' });
@@ -38,11 +38,11 @@ const createRequest = [authenticate, authorize(['admin', 'employee']), async (re
 }];
 
 // Actualizar una solicitud existente
-const updateRequest = [authenticate, authorize(['admin']), async (req, res) => {
+const updateRequest = [authenticateUser, authorizeRole(['admin']), async (req, res) => {
     const { id } = req.params;
     const { title, description } = req.body;
     try {
-        const updatedRequest = await RequestService.updateRequest(id, title, description);
+        const updatedRequest = await requestService.updateRequest(id, title, description);
         if (updatedRequest) {
             res.status(200).json(updatedRequest);
         } else {
@@ -54,10 +54,10 @@ const updateRequest = [authenticate, authorize(['admin']), async (req, res) => {
 }];
 
 // Eliminar una solicitud
-const deleteRequest = [authenticate, authorize(['admin']), async (req, res) => {
+const deleteRequest = [authenticateUser, authorizeRole(['admin']), async (req, res) => {
     const { id } = req.params;
     try {
-        const deletedRequest = await RequestService.deleteRequest(id);
+        const deletedRequest = await requestService.deleteRequest(id);
         if (deletedRequest) {
             res.status(200).json({ message: 'Solicitud eliminada correctamente' });
         } else {
