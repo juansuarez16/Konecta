@@ -6,9 +6,9 @@ const employeeRouter = require('./employeeRoutes');
 function routerApi(app) {
     const router = express.Router();
     app.use('/api/v1',router);
-routerApi.use('/users', userRouter);
-routerApi.use('/requests', requestRouter);
-routerApi.use('/employees', employeeRouter);
+    router.use('/users', userRouter);
+    router.use('/requests', requestRouter);
+    router.use('/employees', employeeRouter);
 }
 
 
