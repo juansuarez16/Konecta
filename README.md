@@ -96,9 +96,19 @@ para ejecutar las pruebas del backend utilice Jest.js
 
 npm run test
 
+
 ## Despliegue 📦
 
-Agrega notas adicionales sobre cómo hacer deploy.
+Este proyecto utiliza Docker Compose para simplificar el proceso de despliegue. Para desplegar el proyecto, sigue estos pasos:
+
+1. Asegúrate de tener Docker y Docker Compose instalados en tu máquina. Si no los tienes, puedes descargarlos desde [aquí](https://www.docker.com/products/docker-desktop).
+
+2. Navega hasta el directorio del proyecto en tu terminal.
+
+3. Ejecuta el siguiente comando para iniciar todos los servicios definidos en tu archivo Docker Compose:
+
+```bash
+docker-compose -f <your_docker_compose_file> up
 
 ## Construido con 🛠️
 
