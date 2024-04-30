@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../../config/sequelize');
 const { Employee } = require('../../domain/Models/Employee'); // Importa el modelo de entidad Employee
 
 const User_TABLE = 'user';
@@ -34,14 +33,6 @@ const UserSchema = {
     role: {
         type: DataTypes.ENUM('empleado', 'administrador'),
         allowNull: false
-    },
-    empleadoId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Employee, 
-            key: 'id'
-        }
     }
 };
 
