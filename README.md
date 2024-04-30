@@ -57,6 +57,19 @@ Necesitarás tener instalado lo siguiente en tu máquina:
 
 Puedes descargar Node.js desde [aquí](https://nodejs.org/), PostgreSQL desde [aquí](https://www.postgresql.org/download/) y Visual Studio Code desde [aquí](https://code.visualstudio.com/download).
 
+# Creación manual de la base de datos
+
+Este proyecto utiliza PostgreSQL como base de datos. Antes de ejecutar el proyecto, necesitas crear una base de datos en PostgreSQL.
+
+## Creación de la base de datos utilizando pgAdmin
+
+1. Abre pgAdmin y conectate al servidor PostgreSQL donde deseas crear la base de datos.
+2. En el panel del navegador, haz clic derecho en el nodo "Databases" y selecciona "Create" -> "Database...".
+3. En la ventana "Create - Database" que aparece, ingresa `pruebaDev` en el campo "Database name".
+4. Haz clic en el botón "Save" para crear la base de datos.
+
+Una vez que hayas creado la base de datos, puedes ejecutar el proyecto y Sequelize creará las tablas automáticamente ya que se hiceron los modelos dentro del proyecto
+
 ### Instalación 🔧
 
 Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutándose.
