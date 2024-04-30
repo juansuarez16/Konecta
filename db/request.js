@@ -1,5 +1,4 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../../config/sequelize');
 const { Employee } = require('../../domain/Models/Employee'); // Importa el modelo de entidad Employee
 
 const Request_TABLE = 'request';
